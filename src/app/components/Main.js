@@ -9,7 +9,8 @@ export default class Main extends React.Component {
     constructor() { // lifecycle number 1
         super();
         this.state = { // define state
-            username: "Attri"
+            username: "Attri",
+            products: []
         }
     }
 
@@ -18,8 +19,15 @@ export default class Main extends React.Component {
             username: "Partik"
         })
     }
+
+    handleAddProduct = (productName) => {
+        this.setState((prevState) => ({  // Update state using this.setState({})
+            products: [...prevState.products, productName]
+        }))
+    }
+    
     render() { // lifecycle number 2
-        const x = 2;
+        const x = 2; // Number
         const interests = ["Listening Music", "Crafting", "Painting", "Cooking"]; // Array
         const name = "Rushika"; // String
         const birth = { // Object
@@ -34,8 +42,8 @@ export default class Main extends React.Component {
                 <button onClick={this.updateUserName}>Update Username</button>
                 <Title x={x} name={name} interests={interests} birthDetail={birth} text="Dashboard Title" />
                 <Welcome />
-                <ProducList />
-                <AddProduct />
+                <ProducList products={this.state.products} />
+                <AddProduct onAdd={this.handleAddProduct}/>
             </div>
         )
     }
