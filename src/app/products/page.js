@@ -1,7 +1,7 @@
 import defaultProducts from '../../data/Products';
 import Link from "next/link";
 
-function ProductList({ products = defaultProducts }) {
+function ProductList({ products = defaultProducts }) { // We can get defaultProducts from API
     return (<div className='container mt-4'>
         <h1 className='mb-4'>Product List</h1>
         <div className='row'>
