@@ -1,9 +1,6 @@
 'use client';
 import React from 'react';
-import Title from './Title';
-import Welcome from './Welcome';
-import ProducList from './ProducList';
-import AddProduct from './AddProduct';
+import Nav from './Nav';
 
 export default class Main extends React.Component {
     constructor() { // lifecycle number 1
@@ -25,25 +22,12 @@ export default class Main extends React.Component {
             products: [...prevState.products, productName]
         }))
     }
-    
-    render() { // lifecycle number 2
-        const x = 2; // Number
-        const interests = ["Listening Music", "Crafting", "Painting", "Cooking"]; // Array
-        const name = "Rushika"; // String
-        const birth = { // Object
-            place: "Hyderabad",
-            year: 2000
-        };
 
+    render() { // lifecycle number 2
         return (
             <div>
-                <h1>This is Main Class Component</h1>
-                <h2>State username is {this.state.username}</h2>
-                <button onClick={this.updateUserName}>Update Username</button>
-                <Title x={x} name={name} interests={interests} birthDetail={birth} text="Dashboard Title" />
-                <Welcome />
-                <ProducList products={this.state.products} />
-                <AddProduct onAdd={this.handleAddProduct}/>
+                <Nav />
+                <main>{this.props.children}</main>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-function ProducList({ products }) {
+function ProductList({ products = [] }) {
     return (<div>
         <h1>This is Product List Functional Component</h1>
         <ul>
@@ -10,4 +10,4 @@ function ProducList({ products }) {
     );
 }
 
-export default ProducList;
+export default ProductList;
