@@ -40,9 +40,14 @@ const AddProduct = ({ onAdd }) => {
             // onAdd(name); // calling onAdd props
             // debugger;
             console.log(newProduct);
-            /* 
-                Call backend API here and send newProduct data, backend Will receive this data and send the reponse accordingly
-            */
+            fetch('http://localhost:4200/product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newProduct)
+            }).then((response) => response.json())
+                .then((json) => console.log(json));
         }
     }
 

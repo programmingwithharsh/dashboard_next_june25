@@ -1,12 +1,32 @@
-import defaultProducts from '../../data/Products';
-import Link from "next/link";
+'use client'
 
-function ProductList({ products = defaultProducts }) { // We can get defaultProducts from API
+import Link from "next/link";
+import { useState, useEffect } from 'react';
+
+function ProductList() {
+
+    const [products, setProducts] = useState([]);
+
+    const handleRemove = (id) => {
+        if (!confirm(`Are you sure you want to remove it?`)) return;
+
+        // Call delete API
+        fetch(`http://localhost:4200/product/${id}`, {
+            method: 'DELETE',
+        });
+    }
+
+    useEffect(() => {
+        fetch('http://localhost:4200/products')
+            .then((response) => response.json())
+            .then((json) => setProducts(json));
+    }, [])
+
     return (<div className='container mt-4'>
         <h1 className='mb-4'>Product List</h1>
         <div className='row'>
             {products.map((product) => (
-                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3' key={product.productId}>
+                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3' key={product._id}>
                     <div className="card h-100">
                         <img src={product.imageUrl} style={{ height: '200px' }} className="card-img-top" alt="..." />
                         <div className="card-body">
@@ -17,6 +37,7 @@ function ProductList({ products = defaultProducts }) { // We can get defaultProd
                             <p className="card-text">{product.price}</p>
                             <p className="card-text">Released: {product.releaseDate}</p>
                             <Link className="btn btn-primary" href="/product-detail">Buy Now</Link>
+                            <button className="btn btn-danger m-2" onClick={() => handleRemove(product._id)}>Remove</button>
                         </div>
                     </div>
                 </div>
