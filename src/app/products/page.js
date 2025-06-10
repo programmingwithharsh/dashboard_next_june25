@@ -36,8 +36,9 @@ function ProductList() {
                             <p className="card-text"><strong>Rating:</strong>{product.starRating}</p>
                             <p className="card-text">{product.price}</p>
                             <p className="card-text">Released: {product.releaseDate}</p>
-                            <Link className="btn btn-primary" href="/product-detail">Buy Now</Link>
+                            <Link className="btn btn-primary" href={`/product-detail/${product._id}`}>Buy Now</Link>
                             <button className="btn btn-danger m-2" onClick={() => handleRemove(product._id)}>Remove</button>
+                            <Link className="btn btn-primary" href={`/product-update/${product._id}`}>Update</Link>
                         </div>
                     </div>
                 </div>
