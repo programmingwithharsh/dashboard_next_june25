@@ -20,7 +20,7 @@ const ProductUpdate = () => {
     useEffect(() => {
         if (!id) return;
 
-        fetch(`http://localhost:4200/product/${id}`)
+        fetch(`http://localhost:3000/api/product/${id}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log("API Response", data);
@@ -43,7 +43,7 @@ const ProductUpdate = () => {
             // debugger;
             console.log(newProduct);
             debugger
-            fetch(`http://localhost:4200/product/${id}`, {
+            fetch(`http://localhost:3000/api/product/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

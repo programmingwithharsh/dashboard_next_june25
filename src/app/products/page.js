@@ -11,13 +11,13 @@ function ProductList() {
         if (!confirm(`Are you sure you want to remove it?`)) return;
 
         // Call delete API
-        fetch(`http://localhost:4200/product/${id}`, {
+        fetch(`http://localhost:3000/api/product/${id}`, {
             method: 'DELETE',
         });
     }
 
     useEffect(() => {
-        fetch('http://localhost:4200/products')
+        fetch('http://localhost:3000/api/product/')
             .then((response) => response.json())
             .then((json) => setProducts(json));
     }, [])

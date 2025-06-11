@@ -9,7 +9,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:4200/product/${id}`)
+            fetch(`http://localhost:3000/api/product/${id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("API Response", data);
