@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const AddProduct = ({ onAdd }) => {
     const [product, setProduct] = useState({
@@ -12,6 +13,7 @@ const AddProduct = ({ onAdd }) => {
         "starRating": '',
         "imageUrl": ''
     });
+    const router = useRouter();
     /*
         In class component, we use this.state, this.setState({}) to update component
         In functional Component we use useState
@@ -30,7 +32,7 @@ const AddProduct = ({ onAdd }) => {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); // stop page refresh
         if (product.productName.trim()) {
             const newProduct = {
@@ -40,14 +42,20 @@ const AddProduct = ({ onAdd }) => {
             // onAdd(name); // calling onAdd props
             // debugger;
             console.log(newProduct);
-            fetch('http://localhost:4200/product', {
+            const res = await fetch('http://localhost:3000/api/product', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(newProduct)
-            }).then((response) => response.json())
-                .then((json) => console.log(json));
+            });
+
+            if (!res.ok) {
+                throw new Error('Failed to add product');
+            }
+
+            const createdProduct = await res.json();
+            router.push('/products');
         }
     }
 

@@ -1,11 +1,16 @@
 'use client'
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const ProductDetail = () => {
     const { id } = useParams();
+    const router = useRouter();
     const [product, setProduct] = useState({});
+
+    const goBack = () => {
+        router.back();
+    }
 
     useEffect(() => {
         if (id) {
@@ -32,6 +37,7 @@ const ProductDetail = () => {
                 <p className="card-text">{product.description}</p>
                 <p className="card-text">{product.price}</p>
                 <p className="card-text">{product.starRating}</p>
+                <button onClick={goBack} type="button" className="btn btn-primary">Back</button>
             </div>
         </div>
     </div>);

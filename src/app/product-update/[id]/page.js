@@ -1,6 +1,6 @@
 'use client'
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const ProductUpdate = () => {
@@ -15,7 +15,7 @@ const ProductUpdate = () => {
         "imageUrl": ""
     });
 
-    debugger
+    const router = useRouter();
 
     useEffect(() => {
         if (!id) return;
@@ -32,7 +32,7 @@ const ProductUpdate = () => {
 
     }, [id])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); // stop page refresh
         if (product.productName.trim()) {
             const newProduct = {
@@ -42,14 +42,19 @@ const ProductUpdate = () => {
             // onAdd(name); // calling onAdd props
             // debugger;
             console.log(newProduct);
-            debugger
-            fetch(`http://localhost:3000/api/product/${id}`, {
+            const res = await fetch(`http://localhost:3000/api/product/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(newProduct)
             })
+
+            if (!res.ok) {
+                throw new Error('Failed to update product');
+            }
+
+            router.push('/products');
         }
     }
 

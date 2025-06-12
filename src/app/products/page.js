@@ -7,13 +7,19 @@ function ProductList() {
 
     const [products, setProducts] = useState([]);
 
-    const handleRemove = (id) => {
+    const handleRemove = async (id) => {
         if (!confirm(`Are you sure you want to remove it?`)) return;
 
         // Call delete API
-        fetch(`http://localhost:3000/api/product/${id}`, {
+        const res = await fetch(`http://localhost:3000/api/product/${id}`, {
             method: 'DELETE',
         });
+
+        if (!res.ok) {
+            throw new Error('Failed to add product');
+        }
+
+        setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
     }
 
     useEffect(() => {
