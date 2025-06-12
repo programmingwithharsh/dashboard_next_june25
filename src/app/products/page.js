@@ -5,13 +5,14 @@ import { useState, useEffect } from 'react';
 
 function ProductList() {
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const [products, setProducts] = useState([]);
 
     const handleRemove = async (id) => {
         if (!confirm(`Are you sure you want to remove it?`)) return;
 
         // Call delete API
-        const res = await fetch(`http://localhost:3000/api/product/${id}`, {
+        const res = await fetch(`${apiUrl}/${id}`, {
             method: 'DELETE',
         });
 
@@ -23,7 +24,7 @@ function ProductList() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/product/')
+        fetch(apiUrl)
             .then((response) => response.json())
             .then((json) => setProducts(json));
     }, [])

@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const ProductDetail = () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const { id } = useParams();
     const router = useRouter();
     const [product, setProduct] = useState({});
@@ -14,7 +15,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:3000/api/product/${id}`)
+            fetch(`${apiUrl}/${id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("API Response", data);

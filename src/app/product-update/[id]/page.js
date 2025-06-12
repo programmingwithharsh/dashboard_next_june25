@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const ProductUpdate = () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const { id } = useParams();
     const [product, setProduct] = useState({
         "productName": "",
@@ -20,7 +21,7 @@ const ProductUpdate = () => {
     useEffect(() => {
         if (!id) return;
 
-        fetch(`http://localhost:3000/api/product/${id}`)
+        fetch(`${apiUrl}/${id}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log("API Response", data);
@@ -42,7 +43,7 @@ const ProductUpdate = () => {
             // onAdd(name); // calling onAdd props
             // debugger;
             console.log(newProduct);
-            const res = await fetch(`http://localhost:3000/api/product/${id}`, {
+            const res = await fetch(`${apiUrl}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

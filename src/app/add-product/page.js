@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const AddProduct = ({ onAdd }) => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const [product, setProduct] = useState({
         "productName": '',
         "productCode": '',
@@ -42,7 +43,7 @@ const AddProduct = ({ onAdd }) => {
             // onAdd(name); // calling onAdd props
             // debugger;
             console.log(newProduct);
-            const res = await fetch('http://localhost:3000/api/product', {
+            const res = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
