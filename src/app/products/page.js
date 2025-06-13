@@ -24,7 +24,7 @@ function ProductList() {
     }
 
     useEffect(() => {
-        fetch('/api/product')
+        fetch(apiUrl)
             .then((response) => response.json())
             .then((json) => setProducts(json));
     }, [])
